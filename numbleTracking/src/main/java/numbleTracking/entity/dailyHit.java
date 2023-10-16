@@ -2,6 +2,7 @@ package numbleTracking.entity;
 
 import java.util.Date;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class dailyHit {
 
 	@ManyToOne
     @JoinColumn(name = "viewcount_id")
-    private viewCount viewCount;
+    private ViewCount viewCount;
 
     @Column(name = "daily_hit")
     private Long dailyHit;

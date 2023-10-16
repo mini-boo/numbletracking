@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "viewcount")
-public class viewCount {
+public class ViewCount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "viewcount_seq_gen")
 	@SequenceGenerator(name = "viewcount_seq_gen", sequenceName = "viewcount_sequence", allocationSize = 1)
