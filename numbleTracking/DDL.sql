@@ -1,41 +1,42 @@
-CREATE TABLE URL (
-    url_id NUMBER PRIMARY KEY,
-    url VARCHAR2(255) NOT NULL,
-    total_views NUMBER DEFAULT 0,
-    daily_views NUMBER DEFAULT 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE viewcount (
+    id           NUMBER NOT NULL,
+    url          VARCHAR2(4000 BYTE) NOT NULL,
+    daily_hit    NUMBER DEFAULT 0 NOT NULL,
+    total_hit    NUMBER DEFAULT 0 NOT NULL,
+    average_hit  NUMBER DEFAULT 0 NOT NULL
 );
 
-CREATE TABLE dailyView (
-    log_id NUMBER PRIMARY KEY,
-    url_id NUMBER,
-    view_date DATE,
-    views_count NUMBER DEFAULT 0,
-    FOREIGN KEY (url_id) REFERENCES URL(url_id)
+CREATE UNIQUE INDEX pk_viewcounts ON
+    viewcount (
+        id
+    ASC );
+
+ALTER TABLE viewcount
+    ADD CONSTRAINT pk_viewcount PRIMARY KEY ( id )
+        USING INDEX pk_viewcounts;
+
+CREATE TABLE dailyhit (
+    id                     NUMBER NOT NULL,
+    viewcount_id           NUMBER NOT NULL,
+    daily_hit              NUMBER DEFAULT 0 NOT NULL,
+    hit_date               DATE NOT NULL
 );
 
-CREATE TABLE weeklyView (
-    stat_id NUMBER PRIMARY KEY,
-    url_id NUMBER,
-    start_date DATE,
-    end_date DATE,
-    total_views NUMBER DEFAULT 0,
-    average_daily_views NUMBER DEFAULT 0,
-    FOREIGN KEY (url_id) REFERENCES URL(url_id)
+CREATE UNIQUE INDEX pk_dailyhits ON
+    dailyhit (
+        id
+    ASC );
+
+ALTER TABLE dailyhit
+    ADD CONSTRAINT pk_dailyhit PRIMARY KEY ( id )
+        USING INDEX pk_dailyhits;
+
+ALTER TABLE dailyhit ADD CONSTRAINT fk_viewcount_to_dailyhit FOREIGN KEY (
+	viewcount_id
+)
+REFERENCES viewcount (
+	id
 );
 
-CREATE TABLE dailyViewBackup (
-    backup_id NUMBER PRIMARY KEY,
-    url_id NUMBER,
-    view_date DATE,
-    views_count NUMBER DEFAULT 0,
-    FOREIGN KEY (url_id) REFERENCES URL(url_id),
-    FOREIGN KEY (backup_id) REFERENCES dailyView(log_id)
-);
-
-CREATE TABLE dailyToWeeklyMapping (
-    daily_id NUMBER,
-    weekly_id NUMBER,
-    FOREIGN KEY (daily_id) REFERENCES DailyViewBackup(backup_id),
-    FOREIGN KEY (weekly_id) REFERENCES WeeklyView(stat_id)
-);
+create SEQUENCE viewcount_sequence;
+create SEQUENCE dailyhit_sequence;
