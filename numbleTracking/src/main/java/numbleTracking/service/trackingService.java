@@ -2,36 +2,46 @@ package numbleTracking.service;
 
 import java.util.Date;
 
-import javax.transaction.Transactional;
-
-import org.apache.jasper.tagplugins.jstl.core.Url;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import entity.dailyView;
-import repository.URLRepository;
-import repository.dailyToWeeklyMappingRepository;
-import repository.dailyViewBackupRepository;
-import repository.dailyViewRepository;
-import repository.weeklyViewRepository;
+import numbleTracking.entity.dailyHit;
+import numbleTracking.entity.viewCount;
+import numbleTracking.repository.dailyHitRepository;
+import numbleTracking.repository.viewCountRepository;
 
 @Service
 public class trackingService {
 	
-	@Autowired
-	private URLRepository urlRepository;
 	
 	@Autowired
-	private dailyViewRepository dailyviewRepository;
+	private dailyHitRepository dailyhitRepository;
 	
 	@Autowired
-	private weeklyViewRepository weeklyviewRepository;
+	private viewCountRepository viewcountRepository;
 	
-	@Autowired
-	private dailyViewBackupRepository dailyviewBackupRepository;
 	
-	@Autowired
-	private dailyToWeeklyMappingRepository dailytoweeklyMappingRepository;
+
+	public void increaseHitCount(viewCount viewcount) {
+	Long currentViewCount = viewcount.getDailyHit();
+	
+	//조회수를 1 증가시킴
+	viewcount.setDailyHit(currentViewCount + 1);
+	
+	//증가된 조회수를 업데이트
+	viewcountRepository.save(viewcount);
+	}
+
+
+
+	public viewCount getHitById(Long id) {
+		viewCount viewcount = viewcountRepository.getHitById(id);
+		return null;
+	}
+	
+
+
+	
 	
 }
 

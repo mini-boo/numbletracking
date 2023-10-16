@@ -1,4 +1,4 @@
-package entity;
+package numbleTracking.entity;
 
 import java.util.Date;
 
@@ -30,8 +30,9 @@ public class dailyHit {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "viewcount_id")
-    private Long viewcountId;
+	@ManyToOne
+    @JoinColumn(name = "viewcount_id")
+    private viewCount viewCount;
 
     @Column(name = "daily_hit")
     private Long dailyHit;
@@ -39,7 +40,5 @@ public class dailyHit {
     @Column(name = "hit_date")
     private Date hitDate;
     
-    @ManyToOne
-    @JoinColumn(name = "viewcount_id")
-    private viewCount viewCount;
+    
 }
