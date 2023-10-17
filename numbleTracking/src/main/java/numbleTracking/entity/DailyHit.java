@@ -1,10 +1,15 @@
 package numbleTracking.entity;
 
+import java.util.Date;
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -18,23 +23,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "viewcount")
-public class viewCount {
+@Table(name = "dailyhit")
+public class DailyHit {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "viewcount_seq_gen")
-	@SequenceGenerator(name = "viewcount_seq_gen", sequenceName = "viewcount_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dailyhit_seq_gen")
+	@SequenceGenerator(name = "dailyhit_seq_gen", sequenceName = "dailyhit_sequence", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "url")
-    private String url;
+	@ManyToOne
+    @JoinColumn(name = "viewcount_id")
+    private ViewCount viewCount;
 
     @Column(name = "daily_hit")
     private Long dailyHit;
 
-    @Column(name = "total_hit")
-    private Long totalHit;
-
-    @Column(name = "average_hit")
-    private Long averageHit;
+    @Column(name = "hit_date")
+    private Date hitDate;
+    
+    
 }
