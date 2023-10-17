@@ -1,8 +1,6 @@
 package numbleTracking.controller;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -12,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import numbleTracking.entity.DailyHit;
 import numbleTracking.entity.ViewCount;
@@ -42,13 +39,19 @@ public class HomeController {
 	        trackingService.increaseTotalHitCount(viewcount);
 	        System.out.println("누적 조회수 : " + viewcount.getTotalHit());
 	        
+	     // 주간 통계 출력
+	        System.out.println("<주간 통계>");
+            List<Object[]> counts = trackingService.countAllDailyHits();
+            for (Object[] count : counts) {
+                Date hitDate = (Date) count[0];
+                Long dailyHit = (Long) count[1];
+                System.out.println(hitDate + " : " + dailyHit + "회");
+            }
+
 	    } else {
 	        // 해당 ID에 해당하는 ViewCount를 찾지 못한 경우에 대한 처리
 	        System.out.println("ViewCount not found for ID: " + id);
 	    }
-	    
-	    //Date에 따라 주간 통계 내기
-	    
 
 	    return "index";
 	}
