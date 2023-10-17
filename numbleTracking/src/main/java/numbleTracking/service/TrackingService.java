@@ -59,6 +59,17 @@ public class TrackingService {
 		
 		return viewcount;
 	}
+
+
+	public void increaseTotalHitCount(ViewCount viewcount) {
+		Long currentTotalCount = viewcount.getTotalHit();
+		
+		viewcount.setTotalHit(currentTotalCount + 1);
+		
+		// 증가된 조회수를 업데이트
+        viewcountRepository.save(viewcount);
+		
+	}
 	
 }
 

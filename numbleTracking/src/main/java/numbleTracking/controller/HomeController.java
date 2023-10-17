@@ -38,10 +38,17 @@ public class HomeController {
 	        trackingService.increaseHitCount(viewcount);
 	        System.out.println("일일 조회수 : " + viewcount.getDailyHit());
 			
+	        // 누적조회수 출력
+	        trackingService.increaseTotalHitCount(viewcount);
+	        System.out.println("누적 조회수 : " + viewcount.getTotalHit());
+	        
 	    } else {
 	        // 해당 ID에 해당하는 ViewCount를 찾지 못한 경우에 대한 처리
 	        System.out.println("ViewCount not found for ID: " + id);
 	    }
+	    
+	    //Date에 따라 주간 통계 내기
+	    
 
 	    return "index";
 	}
