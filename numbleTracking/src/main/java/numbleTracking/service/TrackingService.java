@@ -1,6 +1,8 @@
 package numbleTracking.service;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -26,6 +28,7 @@ public class TrackingService {
     //일일 조회수 관련 기능
     public void increaseHitCount(ViewCount viewcount) {
         if (viewcount != null) {
+        	
             Long currentViewCount = viewcount.getDailyHit();
 
             // 조회수를 1 증가시킴
@@ -56,6 +59,7 @@ public class TrackingService {
 		
 		return viewcount;
 	}
+	
 }
 
 
