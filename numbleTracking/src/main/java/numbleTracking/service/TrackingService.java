@@ -1,11 +1,7 @@
 package numbleTracking.service;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-
-import javax.transaction.Transactional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +66,15 @@ public class TrackingService {
         viewcountRepository.save(viewcount);
 		
 	}
-	
+
+
+	public List<Object[]> countAllDailyHits() {
+        return dailyhitRepository.countAllDailyHits();
+    }
+
+
+
 }
+	
 
 
