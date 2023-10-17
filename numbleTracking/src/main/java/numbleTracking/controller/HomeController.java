@@ -31,7 +31,7 @@ public class HomeController {
 	    if (viewcount != null) {
 	        // url에 접속하면 일일조회수가 1씩 증가
 	        trackingService.increaseHitCount(viewcount);
-	        System.out.println(viewcount.getDailyHit());
+	        System.out.println("일일 조회수" + viewcount.getDailyHit());
 	    } else {
 	        // 해당 ID에 해당하는 ViewCount를 찾지 못한 경우에 대한 처리
 	        System.out.println("ViewCount not found for ID: " + id);

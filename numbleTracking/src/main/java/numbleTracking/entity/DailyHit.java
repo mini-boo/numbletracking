@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "dailyhit")
-public class dailyHit {
+public class DailyHit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dailyhit_seq_gen")
 	@SequenceGenerator(name = "dailyhit_seq_gen", sequenceName = "dailyhit_sequence", allocationSize = 1)
