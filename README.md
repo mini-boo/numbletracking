@@ -13,9 +13,11 @@
 <br>
 
 # 💻 개발 환경
-Java : 11
-Spring Boot : 2.7.13
-Local Oracle DB : xe 11g
+Java : 11 <br>
+Spring Boot : 2.7.13 <br>
+Local Oracle DB : xe 11g <br>
+
+<br>
 
 # 📋 서비스 아키텍처
 ![20231018_133418](https://github.com/mini-boo/numbletracking/assets/81962257/a6a447af-2595-40fc-8e85-c0d706cb3ca4)
